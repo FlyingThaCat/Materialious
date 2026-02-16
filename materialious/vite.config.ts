@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import pkg from './package.json';
 
 export default defineConfig({
+	base: './',
 	plugins: [
 		SvelteKitPWA({
 			injectRegister: 'inline',
