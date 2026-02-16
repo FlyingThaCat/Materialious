@@ -20,32 +20,11 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Install capacitor ios
-        run: npm install @capacitor/ios
-
-      - name: Add capacitor ios
-        run: npx cap add ios
-
-      - name: Create ExportOptions.plist
-        run: |
-          cat > ios/App/ExportOptions.plist <<EOF
-            <?xml version="1.0" encoding="UTF-8"?>
-            <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-            "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-            <plist version="1.0">
-            <dict>
-              <key>method</key>
-              <string>development</string>
-              <key>signingStyle</key>
-              <string>manual</string>
-              <key>compileBitcode</key>
-              <false/>
-            </dict>
-            </plist>
-          EOF
-
       - name: Build Web
         run: npm run build
+
+      - name: Add iOS Platform
+        run: npx cap add ios
 
       - name: Sync Capacitor
         run: npx cap sync ios
@@ -55,7 +34,25 @@ jobs:
           cd ios/App
           pod install
 
-      - name: Build Archive
+      - name: Create ExportOptions.plist
+        run: |
+          cat > ios/App/ExportOptions.plist <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+          "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key>
+            <string>development</string>
+            <key>signingStyle</key>
+            <string>manual</string>
+            <key>compileBitcode</key>
+            <false/>
+          </dict>
+          </plist>
+          EOF
+
+      - name: Build Archive (Unsigned)
         run: |
           cd ios/App
           xcodebuild \
