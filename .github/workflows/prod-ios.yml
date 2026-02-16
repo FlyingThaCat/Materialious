@@ -39,34 +39,20 @@ jobs:
             archive \
             CODE_SIGNING_ALLOWED=NO
     
-      - name: Export IPA
+      - name: Create IPA (Unsigned Jailbreak Version)
         run: |
           cd ios/App
-          cat > ExportOptions.plist <<EOF
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-          "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-            <key>method</key>
-            <string>development</string>
-            <key>signingStyle</key>
-            <string>manual</string>
-            <key>compileBitcode</key>
-            <false/>
-          </dict>
-          </plist>
-          EOF
 
-          mkdir -p build/ipa
-          xcodebuild -exportArchive \
-            -archivePath build/App.xcarchive \
-            -exportPath build/ipa \
-            -exportOptionsPlist ExportOptions.plist
+          mkdir -p build/ipa/Payload
+
+          cp -R build/App.xcarchive/Products/Applications/App.app build/ipa/Payload/
+
+          cd build/ipa
+          zip -r App.ipa Payload
 
       - name: Upload IPA
         uses: actions/upload-artifact@v4
         with:
           name: ios-ipa
-          path: materialious/ios/App/build/ipa/*.ipa
+          path: materialious/ios/App/build/ipa/App.ipa
 
