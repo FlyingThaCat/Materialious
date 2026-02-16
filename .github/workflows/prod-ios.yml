@@ -38,3 +38,19 @@ jobs:
             -archivePath $PWD/build/App.xcarchive \
             archive \
             CODE_SIGNING_ALLOWED=NO
+    
+      - name: Export IPA
+        run: |
+          cd ios/App
+          mkdir -p build/ipa
+          xcodebuild -exportArchive \
+            -archivePath build/App.xcarchive \
+            -exportPath build/ipa \
+            -exportOptionsPlist ExportOptions.plist
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-ipa
+          path: materialious/ios/App/build/ipa/*.ipa
+
