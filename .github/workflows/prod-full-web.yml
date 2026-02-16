@@ -1,13 +1,13 @@
 name: Build full web
 
 on:
-    push:
-        branches:
-            - main
-        paths-ignore:
-            - "**/*.md"
-            - "./fastline/**"
-            - "./materialious/src/lib/i18n/**"
+    # push:
+    #     branches:
+    #         - main
+    #     paths-ignore:
+    #         - "**/*.md"
+    #         - "./fastline/**"
+    #         - "./materialious/src/lib/i18n/**"
 
 jobs:
     web-build:

@@ -1,10 +1,10 @@
 name: Update Flathub PR
 
 on:
-    workflow_run:
-        workflows: ["Build desktop"]
-        types:
-            - completed
+    # workflow_run:
+    #     workflows: ["Build desktop"]
+    #     types:
+    #         - completed
 
 jobs:
     flathub-create-pr:

@@ -1,8 +1,8 @@
 name: Check Android
 
 on:
-    pull_request:
-        branches: ["main"]
+    # pull_request:
+    #     branches: ["main"]
 
 permissions:
     contents: write

@@ -1,12 +1,12 @@
 name: Build desktop
 
 on:
-    push:
-        branches: [main]
-        paths-ignore:
-            - "**/*.md"
-            - "./fastline/**"
-            - "./materialious/src/lib/i18n/**"
+    # push:
+    #     branches: [main]
+    #     paths-ignore:
+    #         - "**/*.md"
+    #         - "./fastline/**"
+    #         - "./materialious/src/lib/i18n/**"
 
     workflow_dispatch:
 
